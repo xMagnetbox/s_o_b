@@ -54,7 +54,6 @@ void(float apilevel, string enginename, float engineversion) CSQC_Init =
 // ============================================================================
 float(float evtype, float scanx, float chary, float devid) CSQC_InputEvent =
 {
-
     switch(evtype)
     {
         case IE_KEYDOWN:
@@ -81,6 +80,15 @@ float(float evtype, float scanx, float chary, float devid) CSQC_InputEvent =
                 float cam_id = getstatf(STAT_VIEW2);
                 if (cam_id)
                     localcmd("cmd clearview2\n");
+            }
+        break;
+
+        case IE_KEYUP:
+            if (scanx == K_MOUSE2)
+            {
+                catjump_pressed = FALSE;
+                // do NOT set catjump_released here,
+                // because that would clear the bar
             }
         break;
     }
@@ -120,6 +128,12 @@ void(vector viewsize, float scoresshown) CSQC_DrawScores =
 void(vector virtsize, float showscores) CSQC_DrawHud =
 {
     screensize = virtsize;
+    
+    vector jump_border_color;
+    vector swipe_border_color;
+
+    jump_border_color = catjump_pressed ? '1.0 1.0 0' : '1 1 1'; // first vector is a yellow-gold color
+    swipe_border_color = catswipe_pressed ? '1.0 1.0 0' : '1 1 1';
 
     // (your HUD code remains unchanged)
     // [ ... existing HUD drawing code kept exactly as-is ... ]
@@ -127,11 +141,11 @@ void(vector virtsize, float showscores) CSQC_DrawHud =
     // and not involved in the errors.
     // -------------------------------------------------------------------------
 
-    // jump bar bg
-    drawfill([screensize_x/2-100, screensize_y-27], [200, 2], '1 1 1', 0.3);
-    drawfill([screensize_x/2-100, screensize_y-13], [200, 2], '1 1 1', 0.3);
-    drawfill([(screensize_x/2)-110, screensize_y-27], [10, 16], '1 1 1', 0.3);
-    drawfill([(screensize_x/2)+100, screensize_y-27], [10, 16], '1 1 1', 0.3);
+    // jump bar border
+    drawfill([screensize_x/2-100, screensize_y-27], [200, 2], jump_border_color, 0.3);
+    drawfill([screensize_x/2-100, screensize_y-13], [200, 2], jump_border_color, 0.3);
+    drawfill([(screensize_x/2)-110, screensize_y-27], [10, 16], jump_border_color, 0.3);
+    drawfill([(screensize_x/2)+100, screensize_y-27], [10, 16], jump_border_color, 0.3);
 
     drawstring([(screensize_x/2)-150, screensize_y-23], "JUMP", '10 10', '1 1 1', 0.5, DRAWFLAG_NORMAL);
     drawpic([(screensize_x/2)-170, screensize_y-23], "gfx/jumpicon_7x8.png", [7, 8], '1 1 1', 0.5, DRAWFLAG_NORMAL);
@@ -149,11 +163,11 @@ void(vector virtsize, float showscores) CSQC_DrawHud =
     vector speedcolor = (speed > 350) ? '1 0 0' : '1 1 1';
     drawstring([(screensize_x/2), screensize_y/2-10], ftos(rint(speed)), '8 8 0', speedcolor, 1, 0);
 	
-	// swipe background
-    drawfill([screensize_x/2-100, screensize_y-45], [200, 2], '1 1 1', 0.3);
-    drawfill([screensize_x/2-100, screensize_y-31], [200, 2], '1 1 1', 0.3);
-    drawfill([(screensize_x/2)-110, screensize_y-45], [10, 16], '1 1 1', 0.3);
-    drawfill([(screensize_x/2)+100, screensize_y-45], [10, 16], '1 1 1', 0.3);
+    // swipe border
+    drawfill([screensize_x/2-100, screensize_y-45], [200, 2], swipe_border_color, 0.3);
+    drawfill([screensize_x/2-100, screensize_y-31], [200, 2], swipe_border_color, 0.3);
+    drawfill([(screensize_x/2)-110, screensize_y-45], [10, 16], swipe_border_color, 0.3);
+    drawfill([(screensize_x/2)+100, screensize_y-45], [10, 16], swipe_border_color, 0.3);
 
     drawstring([(screensize_x/2)-160, screensize_y-42], "SWIPE", '10 10', '1 1 1', 0.5, DRAWFLAG_NORMAL);
     drawpic([(screensize_x/2)-170, screensize_y-42], "gfx/pawprint.png", [8, 8], '1 1 1', 0.5, DRAWFLAG_NORMAL);
