@@ -48,7 +48,7 @@ void() aut_Fire =
 		newmis.velocity = vec*1300;
 		newmis.owner = self.owner;
 		//newmis.classname = "wizspike";
-		newmis.touch = HorizonTouch;
+		newmis.touch = spike_touch;
 		setmodel (newmis, "progs/horiz_proj.mdl");
 		setsize (newmis, VEC_ORIGIN, VEC_ORIGIN);
 		newmis.effects = EF_DIMLIGHT;
