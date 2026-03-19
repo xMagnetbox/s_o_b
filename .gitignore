@@ -1,0 +1,18 @@
+# Compiled QuakeC output
+progs.dat
+
+# Build artifacts
+*.log
+*.tmp
+
+# OS junk
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+
+# Backups
+*~
+*.bak
