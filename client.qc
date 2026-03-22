@@ -535,8 +535,8 @@ void() PutClientInServer =
 	// setmodel (self, "progs/null_256.spr");     // Drake -- dumptruck_ds
 	mindex_inviso = self.modelindex;
 
-	setmodel (self, "progs/player.mdl");
-	//setmodel (self, "progs/boyd_model.mdl");
+	//setmodel (self, "progs/player.mdl");
+	setmodel (self, "progs/boyd_model.mdl");
 	modelindex_player = self.modelindex;
 
 	setsize (self, VEC_HULL_MIN, VEC_HULL_MAX);

@@ -24,7 +24,7 @@ $frame shoot1 shoot2 shoot3 shoot4 shoot5 shoot6 shoot7 shoot8 shoot9 shoot10 sh
 
 $frame die1 die2 die3 die4 die5 die6 die7
 
-
+//60 frames
 
 
 
@@ -196,7 +196,7 @@ void() monster_automaton =
 		return;
 	}
 	
-	precache_model ("progs/automaton.mdl");
+	precache_model ("progs/automaton_unp.iqm");
 	precache_model ("progs/horiz_proj.mdl");
 	precache_sound ("dump/lguncharge.wav");
 	precache_sound ("automaton/aut_windup.wav");
@@ -210,7 +210,7 @@ void() monster_automaton =
 	self.solid = SOLID_SLIDEBOX;
 	self.movetype = MOVETYPE_STEP;
 
-	setmodel (self, "progs/automaton.mdl");
+	setmodel (self, "progs/automaton_unp.iqm");
 
 	setsize (self, '-16 -16 -24', '16 16 40');
 	self.health = 130;

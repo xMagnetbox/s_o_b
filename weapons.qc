@@ -621,13 +621,19 @@ void() T_MissileTouch =
 //	sound (self, CHAN_WEAPON, "weapons/r_exp3.wav", 1, ATTN_NORM);
 	self.origin = self.origin - 8*normalize(self.velocity);
 
-	WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
-	WriteByte (MSG_BROADCAST, TE_EXPLOSION);
-	WriteCoord (MSG_BROADCAST, self.origin_x);
-	WriteCoord (MSG_BROADCAST, self.origin_y);
-	WriteCoord (MSG_BROADCAST, self.origin_z);
+	particle (self.origin, '0 0 5', 240, 20);
+	particle (self.origin, '0 0 -5', 240, 20);
+	particle (self.origin, '0 5 0', 240, 20);
+	particle (self.origin, '0 -5 0', 240, 20);
+	particle (self.origin, '5 0 0', 240, 20);
+	particle (self.origin, '-5 0 0', 240, 20);
+	//WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
+	//WriteByte (MSG_BROADCAST, TE_EXPLOSION);
+	//WriteCoord (MSG_BROADCAST, self.origin_x);
+	//WriteCoord (MSG_BROADCAST, self.origin_y);
+	//WriteCoord (MSG_BROADCAST, self.origin_z);
 	
-	dprint("hit em with the rocket \n");
+	dprint("hit em with the cat eyes baby \n");
 	if (self.owner.classname == "player")
 		self.owner.view2 = other;
 	
@@ -713,7 +719,7 @@ void() W_FireRocket =
 
 	self.currentammo = self.ammo_rockets = self.ammo_rockets - 1;
 
-	sound (self, CHAN_WEAPON, "weapons/sgun1.wav", 1, ATTN_NORM);
+	sound (self, CHAN_WEAPON, "player/meow_echo.ogg", 1, ATTN_NORM);
 
 	self.punchangle_x = -0.5;
 
