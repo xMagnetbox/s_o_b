@@ -620,13 +620,20 @@ void() T_MissileTouch =
 
 //	sound (self, CHAN_WEAPON, "weapons/r_exp3.wav", 1, ATTN_NORM);
 	self.origin = self.origin - 8*normalize(self.velocity);
-
+	
+	
+/*
+	normal in-game particle effect method
 	particle (self.origin, '0 0 5', 240, 20);
 	particle (self.origin, '0 0 -5', 240, 20);
 	particle (self.origin, '0 5 0', 240, 20);
 	particle (self.origin, '0 -5 0', 240, 20);
 	particle (self.origin, '5 0 0', 240, 20);
 	particle (self.origin, '-5 0 0', 240, 20);
+*/
+	pointparticles(particleeffectnum("boyd_particles.missile_enemy_hit_2"), self.origin, '0 0 0', 1); //homegrown particles--origin, vel, count
+	
+	
 	//WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
 	//WriteByte (MSG_BROADCAST, TE_EXPLOSION);
 	//WriteCoord (MSG_BROADCAST, self.origin_x);

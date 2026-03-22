@@ -482,7 +482,8 @@ void() worldspawn =
 	precache_sound ("items/r_item1.wav");
 	precache_sound ("dump/armsh1.wav"); // DropShard -- dumptruck_ds
 	precache_model ("progs/armshr.mdl");
-	precache_model ("progs/mouse_toy.mdl");
+	precache_model ("progs/mouse_toy.mdl"); // Song of boyd
+	particleeffectnum("boyd_particles.missile_enemy_hit_2"); // Song of boyd
 
 //
 // Setup light animation tables. 'a' is total darkness, 'z' is maxbright.
